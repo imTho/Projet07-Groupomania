@@ -1,12 +1,17 @@
 const express = require('express');
-const app = express();
-
 const bodyParser = require('body-parser');
-
-// Security packages
 const helmet = require('helmet');
 const cors = require('cors');
 require('dotenv').config()
+
+const userRoutes = require('./routes/user');
+const contentRoutes = require('./routes/content');
+const path = require('path');
+
+const app = express();
+
+//Database connection//
+require("./database_connect");
 
 //CORS
 app.use((req, res, next) => {
@@ -16,9 +21,12 @@ app.use((req, res, next) => {
     next();
 });
 
-
+//Security & data
 app.use(bodyParser.json());
 app.use(helmet());
 app.use(cors());
+
+//Routes
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 module.exports = app;
