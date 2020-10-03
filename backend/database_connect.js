@@ -2,10 +2,10 @@ const mysql = require('mysql');
 require('dotenv').config()
 
 const sql = mysql.createConnection({
-    host: 'imthoditheo.mysql.db',
-    user: 'imthoditheo',
-    password: 'XP24A3zuj',
-    database: 'imthoditheo'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASS,
+    database: process.env.DB_NAME
 });
 
 sql.connect(function (err) {
