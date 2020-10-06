@@ -1,0 +1,35 @@
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const db = require("../database_connect");
+const userQuery = require('../models/user');
+
+//Inscription
+exports.signup = (req, res, next) => {
+    //Cryptage Email
+    const buffer = Buffer.from(req.body.email);
+    const cryptedEmail = buffer.toString('base64');
+    //Cryptage du MDP
+    bcrypt.hash(req.body.password, 10)
+        .then(cryptedPassword => {
+            //Ajout à la BDD
+            db.query(`INSERT INTO users VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${cryptedPassword}', '${cryptedEmail}')`,
+                (err, results, fields) => {
+                    if (err) {
+                        console.log(err);
+                        return res.status(400).json("erreur");
+                    }
+                    return res.status(201).json({
+                        message: 'Votre compte a bien été crée !'
+                    });
+                }
+            );
+        })
+        .catch(error => res.status(500).json({
+            error
+        }));
+};
+
+//Connexion
+exports.login = (req, res, next) => {
+
+};

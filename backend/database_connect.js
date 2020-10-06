@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-require('dotenv').config()
+require('dotenv').config();
 
 const sql = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -13,7 +13,7 @@ sql.connect(function (err) {
         return console.error('error: ' + err.message);
     }
 
-    console.log('Connected to the MySQL server.');
+    console.log('Connection à la base de donnée réussie !');
 });
 
 module.exports = sql;
