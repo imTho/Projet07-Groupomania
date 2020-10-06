@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h2>Inscription</h2>
         <label for="nom">Nom</label>
         <input id="nom" type="text" required>
         
@@ -12,7 +13,7 @@
         <label for="email">Email</label>
         <input id="email" type="email" required>
 
-        <button id="submit-btn" @click= signup()>S'inscrire</button>
+        <button id="signup-btn" @click= signup()>S'inscrire</button>
     </div>
 </template>
 

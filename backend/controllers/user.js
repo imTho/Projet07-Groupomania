@@ -31,5 +31,37 @@ exports.signup = (req, res, next) => {
 
 //Connexion
 exports.login = (req, res, next) => {
-
+    const buffer = Buffer.from(req.body.email);
+    const cryptedEmail = buffer.toString('base64');
+    //Recherche de l'utilisateur dans la BDD
+    db.query(`SELECT * FROM users WHERE email='${cryptedEmail}'`,
+        (err, results, rows) => {
+            //Si utilisateur trouvé : 
+            if (results.length > 0) {
+                //Verification du MDP
+                bcrypt.compare(req.body.password, results[0].password)
+                    .then(valid => {
+                        //Si MDP invalide erreur
+                        if (!valid) {
+                            res.status(401).json({
+                                message: 'Mot de passe incorrect.'
+                            });
+                            //Si MDP valide création d'un token
+                        } else {
+                            res.status(200).json({
+                                userId: results[0].id,
+                                token: jwt.sign({
+                                    userId: results[0].id
+                                }, 'SECRET_TOKEN', {
+                                    expiresIn: '24h'
+                                })
+                            });
+                        }
+                    });
+            } else if (err) {
+                console.log(err);
+                return res.status(400).json("erreur");
+            }
+        }
+    );
 };
