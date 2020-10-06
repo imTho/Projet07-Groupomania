@@ -50,6 +50,8 @@ exports.login = (req, res, next) => {
                         } else {
                             res.status(200).json({
                                 userId: results[0].id,
+                                nom: results[0].nom,
+                                prenom: results[0].prenom,
                                 token: jwt.sign({
                                     userId: results[0].id
                                 }, 'SECRET_TOKEN', {

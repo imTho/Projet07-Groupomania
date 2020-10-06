@@ -21,21 +21,29 @@ export default {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
+            let token = '';
+
             const login = {
                 email,
                 password
             }
 
-            //Sending Order(POST)
+            //Sending User(POST)
             const options = {
                 method: 'POST',
                 body: JSON.stringify(login),
-                headers: {'Content-Type': 'application/json'}
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                    }
             }
 
             fetch('http://localhost:3000/api/auth/login', options)
                 .then(res => res.json())
-                .then(data => console.log(data))
+                .then(data => {
+                    localStorage.setItem('user', JSON.stringify(data));
+                    token = data.token;
+                }); 
         }
     }
 }
