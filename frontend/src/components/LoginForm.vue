@@ -1,19 +1,32 @@
 <template>
     <div>
-        <h2>Connexion</h2>
-        <label for="email">Email</label>
-        <input id="login-email" type="text" required>
-        
-        <label for="password">Mot de passe</label>
-        <input id="login-password" type="password" required>
+        <img src="/assets/img/icon-above-font.svg" alt="Groupomania logo">
+        <nav><span>Se connecter</span> | <span>S'inscrire</span></nav>
+        <form @submit.prevent = login()>
+            <label for="email">Email</label>
+            <input id="login-email" type="text" placeholder="Email" required>
+            
+            <label for="password">Mot de passe</label>
+            <input id="login-password" type="password" placeholder="Mot de passe" required>
 
-        <button id="login-btn" @click= login()>Connexion</button>
+            <button id="login-btn" type="submit">Connexion</button>
+
+            <div class="error-message">{{message}}</div>
+        </form>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'LoginForm',
+
+    data() {
+        return {
+            message: "",
+        };
+    },
 
     methods: {
 
@@ -21,34 +34,39 @@ export default {
             const email = document.getElementById("login-email").value;
             const password = document.getElementById("login-password").value;
 
-            let token = '';
-
-            const login = {
-                email,
-                password
-            }
-
-            //Sending User(POST)
-            const options = {
-                method: 'POST',
-                body: JSON.stringify(login),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
+            axios.post('http://localhost:3000/api/auth/login',
+                {
+                    email,
+                    password
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-            }
-
-            fetch('http://localhost:3000/api/auth/login', options)
-                .then(res => res.json())
-                .then(data => {
-                    localStorage.setItem('user', JSON.stringify(data));
-                    token = data.token;
-                }); 
+                }
+            )
+            .then(res => {
+                localStorage.setItem('user', JSON.stringify(res.data));
+            })
+            .catch((error) => {
+                if (error.response.status === 401) {
+                    this.message = "Email ou mot de passe invalide.";
+                }
+                if (error.response.status === 500) {
+                    this.message = "Erreur serveur.";
+                }
+            });
         }
     }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    div{
+        max-width: 800px;
+        form{
 
+        }
+    }
+    
 </style>
