@@ -1,12 +1,11 @@
 <template>
-    <div>
-        <img src="/assets/img/icon-above-font.svg" alt="Groupomania logo">
-        <nav><span>Se connecter</span> | <span>S'inscrire</span></nav>
+    <div class="wrapper">
+        <img src="/assets/img/groupomania-logo.png" alt="Groupomania logo">
+        <nav><router-link to="/" class="active">Se connecter</router-link> | <router-link to="/signup">S'incrire</router-link></nav>
         <form @submit.prevent = login()>
-            <label for="email">Email</label>
+
             <input id="login-email" type="text" placeholder="Email" required>
             
-            <label for="password">Mot de passe</label>
             <input id="login-password" type="password" placeholder="Mot de passe" required>
 
             <button id="login-btn" type="submit">Connexion</button>
@@ -47,6 +46,7 @@ export default {
             )
             .then(res => {
                 localStorage.setItem('user', JSON.stringify(res.data));
+                location.reload();
             })
             .catch((error) => {
                 if (error.response.status === 401) {
@@ -61,12 +61,56 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-    div{
-        max-width: 800px;
-        form{
+<style scoped>
+    .wrapper{
+        max-width: 500px;
+        margin: 90px auto;
+    }
 
-        }
+    img{
+        width: 100%;
+    }
+
+    nav{
+        font-size: 1.05rem;
+        margin: 20px;
+    }
+
+    .active{
+        color: red;
+        font-weight: bold;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    form label{
+        color: rgba(0, 0, 0, .5);
+        margin: 10px;
+    }
+
+    form input{
+        font-size: 1.05rem;
+        padding: 10px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    #login-btn{
+        padding: 10px;
+        font-size: 1.1rem;
+        color: white;
+        background-color: rgb(43, 42, 42);
+        border: none;
+        border-radius: 10px;
+        transition-duration: 0.2s;
+        cursor: pointer;
+    }
+
+    #login-btn:hover{
+        transform: scale(1.025);
     }
     
 </style>

@@ -1,18 +1,44 @@
 <template>
   <div class="home">
-    <LoginForm/>
+    <LoginForm v-if="!connected"/>
+    <Posts v-if="connected"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import LoginForm from '@/components/LoginForm.vue';
+import Posts from '@/components/Posts.vue';
 
 export default {
   name: 'Home',
 
   components: {
-    LoginForm
+    LoginForm,
+    Posts
   },
+
+  data() {
+    return{
+      connected: true
+    };
+  },
+
+  methods: {
+    checkConnected(){
+      if(localStorage.user !== undefined){
+        this.connected = true;
+        console.log('Utilisateur connecté !');
+      }
+      else if(localStorage.user == undefined){
+        this.connected = false;
+        console.log('Utilisateur non connecté !');
+      }
+    }
+  },
+
+  mounted(){
+    this.checkConnected()
+  }
 }
 </script>
