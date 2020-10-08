@@ -6,12 +6,12 @@
       <div class="overlay" v-if="visible">
           <div class="form-wrapper">
             <span class="form-close"  @click="visible = false">Fermer</span>
-            <form class="newPost-form">
+            <form class="newPost-form" @submit.prevent="sendNewPost()">
                 <label for="newPost-title">Titre</label>
                 <input id="newPost-title" type="text" placeholder="Titre de votre post..." required>
                 <label for="newPost-content">Contenu</label>
                 <textarea id="newPost-content" placeholder="Contenu de votre post..."></textarea>
-                <button id="newPost-btn" type="submit">Publier</button>
+                <button id="newPost-btn" type="submit" >Publier</button>
             </form>
           </div>
       </div>
@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'NewPost',
 
@@ -29,6 +31,33 @@ export default {
             visible: false,
         }
     },
+
+    methods: {
+        sendNewPost(){
+            const token = JSON.parse(localStorage.user).token;
+            const user = JSON.parse(localStorage.user);
+
+            const title = document.getElementById("newPost-title").value;
+            const content = document.getElementById("newPost-content").value;
+
+            axios.post('http://localhost:3000/api/posts/newPost',
+                    {
+                        userId: user.userId,
+                        title,
+                        content
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    }
+                )
+                .then( 
+                    this.visible = false
+                )
+        }
+    }
 }
 </script>
 

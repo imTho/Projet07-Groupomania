@@ -33,7 +33,6 @@ export default {
     },
 
     methods: {
-
         signup(){
             const nom = document.getElementById("signup-nom").value;
             const prenom = document.getElementById("signup-prenom").value;
@@ -64,9 +63,7 @@ export default {
 
             else{
                 this.message = "Vérifier le mot de passe";
-            }
-
-            
+            }   
         }
     }
 }
