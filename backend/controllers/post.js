@@ -34,3 +34,14 @@ exports.getOnePost = (req, res, next) => {
         return res.status(200).json(result);
     });
 };
+// Delete OnePost
+exports.deleteOnePost = (req, res, next) => {
+    db.query(`DELETE FROM posts WHERE posts.id = ${req.body.postId}`, (error, result, field) => {
+        if (error) {
+            return res.status(400).json({
+                error
+            });
+        }
+        return res.status(200).json(result);
+    });
+};
