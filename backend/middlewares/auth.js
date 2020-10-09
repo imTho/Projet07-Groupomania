@@ -1,6 +1,4 @@
 const jwt = require('jsonwebtoken');
-
-
 module.exports = (req, res, next) => {
     try {
         //On prend le token de la requete

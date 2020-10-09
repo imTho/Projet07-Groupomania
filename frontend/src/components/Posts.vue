@@ -1,12 +1,13 @@
 <template>
     <div class="posts">
         <div class="post" v-for = "post in posts" :key="post.id">
-            <div class="post-header">
-                <span class="post-info">Posté le : {{post.date}} par {{post.prenom}} {{post.nom}}</span> 
-                <span class="modify-btn" v-if=" $user.userId == post.userId ">Modifier le post</span> 
-            </div>  
-            <h2 class="post-title">{{post.title}}</h2>
-            <div class="post-content">{{post.content}}</div>
+            <router-link :to="{ name: 'Post', params: { id: post.id } }">
+                <div class="post-header">
+                    <span class="post-info">Posté le : {{post.date}} par {{post.prenom}} {{post.nom}}</span> 
+                </div>  
+                <h2 class="post-title">{{post.title}}</h2>
+                <div class="post-content">{{post.content}}</div>
+            </router-link>
         </div>
     </div>
 </template>
@@ -20,10 +21,11 @@ export default {
     data(){
         return {
             posts: [],
+            visible: false
         }
     },
 
-    mounted() {
+    created() {
         if(localStorage.user != undefined){
             this.getAllPost();
         }
@@ -31,7 +33,6 @@ export default {
 
     methods: {
         getAllPost(){
-
             axios.get(`${this.$apiUrl}/posts/getAllPost`,
                 {
                     headers: {
@@ -43,7 +44,7 @@ export default {
             .then(res => {
                 this.posts = res.data;
             })
-        },
+        }
     }
 }
 </script>
@@ -78,11 +79,6 @@ export default {
         justify-content: space-between;
         color: rgb(175, 175, 175);
         font-size: .8rem;
-    }
-
-    .modify-btn{
-        color: red;
-        cursor: pointer;
     }
 
     .post-content{
