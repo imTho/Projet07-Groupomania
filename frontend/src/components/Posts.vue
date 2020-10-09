@@ -3,7 +3,7 @@
         <div class="post" v-for = "post in posts" :key="post.id">
             <div class="post-header">
                 <span class="post-info">Posté le : {{post.date}} par {{post.prenom}} {{post.nom}}</span> 
-                <span class="modify-btn" v-if="user.userId == post.userId">Modifier le post</span> 
+                <span class="modify-btn" v-if=" $user.userId == post.userId ">Modifier le post</span> 
             </div>  
             <h2 class="post-title">{{post.title}}</h2>
             <div class="post-content">{{post.content}}</div>
@@ -24,19 +24,19 @@ export default {
     },
 
     mounted() {
-        this.user = JSON.parse(localStorage.user);
-        this.getAllPost();
+        if(localStorage.user != undefined){
+            this.getAllPost();
+        }
     },
 
     methods: {
         getAllPost(){
-            const token = JSON.parse(localStorage.user).token;
 
-            axios.get('http://localhost:3000/api/posts/getAllPost',
+            axios.get(`${this.$apiUrl}/posts/getAllPost`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${this.$token}`
                     }
                 }
             )
@@ -59,10 +59,14 @@ export default {
         position: relative;
         padding: 20px 20px 20px 30px;
         margin-bottom: 30px;
-        border-radius: 0px 10px 10px 0px;
         border-left: 5px solid red;
         box-shadow: 0px 0px 50px -7px rgba(0,0,0,0.1);
         text-align: left;
+        transition-duration: .1s;
+    }
+
+    .post:hover{
+        box-shadow: 0px 0px 50px -7px rgba(0, 0, 0, 0.2);
     }
 
     .post h2{

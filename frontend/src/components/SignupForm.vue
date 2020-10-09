@@ -41,7 +41,7 @@ export default {
             const email = document.getElementById("signup-email").value;
 
             if(password === passwordVerif){
-                axios.post('http://localhost:3000/api/auth/signup',
+                axios.post(`${this.$apiUrl}/auth/signup`,
                     {
                         nom,
                         prenom,

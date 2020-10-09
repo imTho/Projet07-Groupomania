@@ -34,28 +34,23 @@ export default {
 
     methods: {
         sendNewPost(){
-            const token = JSON.parse(localStorage.user).token;
-            const user = JSON.parse(localStorage.user);
-
             const title = document.getElementById("newPost-title").value;
             const content = document.getElementById("newPost-content").value;
 
-            axios.post('http://localhost:3000/api/posts/newPost',
+            axios.post(`${this.$apiUrl}/posts/newPost`,
                     {
-                        userId: user.userId,
+                        userId: this.$user.userId,
                         title,
                         content
                     },
                     {
                         headers: {
                             'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'Authorization': `Bearer ${this.$token}`
                         }
                     }
                 )
-                .then( 
-                    this.visible = false
-                )
+                .then( this.visible = false);
         }
     }
 }
