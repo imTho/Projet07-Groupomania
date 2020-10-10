@@ -56,3 +56,14 @@ exports.modifyOnePost = (req, res, next) => {
         return res.status(200).json(result);
     });
 };
+// getUserPosts
+exports.getUserPosts = (req, res, next) => {
+    db.query(`SELECT * FROM posts WHERE posts.userId = ${req.body.userId}`, (error, result, field) => {
+        if (error) {
+            return res.status(400).json({
+                error
+            });
+        }
+        return res.status(200).json(result);
+    });
+};

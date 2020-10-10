@@ -8,5 +8,6 @@ router.post('/newPost', auth, userCtrl.newPost);
 router.post('/getOnePost', auth, userCtrl.getOnePost);
 router.post('/deleteOnePost', auth, userCtrl.deleteOnePost);
 router.post('/modifyOnePost', auth, userCtrl.modifyOnePost);
+router.post('/getUserPosts', auth, userCtrl.getUserPosts);
 
 module.exports = router;

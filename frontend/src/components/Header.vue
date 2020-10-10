@@ -5,7 +5,9 @@
         </router-link>
 
         <nav>
-            <div>Mon compte</div>
+            <router-link to='/profile'>
+                <div>Mon compte</div>
+            </router-link>
             <div id="disconnect-btn" @click = disconnect()>Se déconnecter</div>
         </nav>
     </div> 
