@@ -45,3 +45,14 @@ exports.deleteOnePost = (req, res, next) => {
         return res.status(200).json(result);
     });
 };
+// Modify OnePost
+exports.modifyOnePost = (req, res, next) => {
+    db.query(`UPDATE posts SET title = '${req.body.title}', content = '${req.body.content}' WHERE posts.id = ${req.body.postId}`, (error, result, field) => {
+        if (error) {
+            return res.status(400).json({
+                error
+            });
+        }
+        return res.status(200).json(result);
+    });
+};

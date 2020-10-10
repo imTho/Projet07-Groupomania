@@ -11,7 +11,8 @@
         </div>
 
         <button v-if="authorized && !modify" @click="modify = true">Modifier</button>
-        <button v-if="modify">Publier les modifications</button>
+        <button v-if="modify" @click="modify = false">Annuler</button>
+        <button v-if="modify" @click="modifyOnePost()">Publier les modifications</button>
         <button v-if="modify" class="delete-btn" @click="deleteOnePost()">Supprimer le post</button>
     </div>
     
@@ -69,6 +70,27 @@ export default {
             axios.post(`${this.$apiUrl}/posts/deleteOnePost`,
                 {
                     postId,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.$token}`
+                    }
+                }
+            )
+            .then(location.href = "/");
+        },
+
+        modifyOnePost(){
+            const postId = this.$route.params.id;
+            const title = document.querySelector('.modify-title').value;
+            const content = document.querySelector('.modify-content').value;
+            
+            axios.post(`${this.$apiUrl}/posts/modifyOnePost`,
+                {
+                    postId,
+                    title,
+                    content
                 },
                 {
                     headers: {
