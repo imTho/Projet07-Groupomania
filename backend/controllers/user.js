@@ -12,7 +12,7 @@ exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(cryptedPassword => {
             //Ajout à la BDD
-            db.query(`INSERT INTO users VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${cryptedPassword}', '${cryptedEmail}')`,
+            db.query(`INSERT INTO users VALUES (NULL, '${req.body.nom}', '${req.body.prenom}', '${cryptedPassword}', '${cryptedEmail}', 0)`,
                 (err, results, fields) => {
                     if (err) {
                         console.log(err);
@@ -52,6 +52,7 @@ exports.login = (req, res, next) => {
                                 userId: results[0].id,
                                 nom: results[0].nom,
                                 prenom: results[0].prenom,
+                                admin: results[0].admin,
                                 token: jwt.sign({
                                     userId: results[0].id
                                 }, 'SECRET_TOKEN', {
