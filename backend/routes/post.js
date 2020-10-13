@@ -9,5 +9,8 @@ router.post('/getOnePost', auth, userCtrl.getOnePost);
 router.post('/deleteOnePost', auth, userCtrl.deleteOnePost);
 router.post('/modifyOnePost', auth, userCtrl.modifyOnePost);
 router.post('/getUserPosts', auth, userCtrl.getUserPosts);
+router.post('/newComment', auth, userCtrl.newComment);
+router.post('/getAllComments', auth, userCtrl.getAllComments);
+router.post('/deleteComment', auth, userCtrl.deleteComment);
 
 module.exports = router;

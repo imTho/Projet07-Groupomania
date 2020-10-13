@@ -108,7 +108,7 @@ export default {
 <style scoped>
     /* Post style */
     .post-wrapper{
-        margin: 50px auto;
+        margin: 50px auto 30px auto;
         padding: 30px;
         max-width: 800px;
         text-align: left;
@@ -164,7 +164,7 @@ export default {
         border-radius: 10px;
         transition-duration: 0.2s;
         cursor: pointer;
-        margin: 0px 20px 0px 20px;
+        margin: 0px 20px 50px 20px;
     }
 
     .delete-btn{
