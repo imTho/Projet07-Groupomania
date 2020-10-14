@@ -26,7 +26,7 @@ export default {
         }
     },
 
-    created() {
+    mounted() {
         if(localStorage.user != undefined){
             this.getAllPost();
         }

@@ -8,6 +8,8 @@
             <span>{{this.$user.nom}}</span> <span>{{this.$user.prenom}}</span>
         </div>
 
+        <div class="delete-profile" @click="deleteUser()">Supprimer le compte</div>
+
         <h3>Vos posts :</h3>
         <UserPosts/>
         
@@ -15,6 +17,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 import LoginForm from '@/components/LoginForm.vue';
 import Header from '@/components/Header.vue';
 import UserPosts from '@/components/UserPosts.vue';
@@ -48,7 +52,26 @@ export default {
         this.connected = false;
         console.log('Utilisateur non connecté !');
       }
+    },
+
+    deleteUser(){
+      const userId = this.$user.userId;
+
+      axios.post(`${this.$apiUrl}/auth/deleteUser`,
+          {
+            userId
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${this.$token}`
+            }
+          }
+      )
+      .then(localStorage.removeItem('user'))
+      .then(location.href = "/");
     }
+
   }
 }
 </script>
@@ -72,5 +95,11 @@ export default {
 
     .profile-info span {
         font-size: 3rem;
+    }
+
+    .delete-profile{
+      color: red;
+      margin-bottom: 30px;
+      cursor: pointer;
     }
 </style>

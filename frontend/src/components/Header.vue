@@ -20,7 +20,7 @@ export default {
     methods: {
         disconnect(){
             localStorage.removeItem('user');
-            location.reload();
+            location.href = "/";
         }
     }
 }

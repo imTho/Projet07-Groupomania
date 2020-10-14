@@ -54,16 +54,21 @@ export default {
                         }
                     }
                 )
-                .then( res =>{
-                        console.log(res);
-                        location.href = "/";
+                .then(res => {
+                    if(res.status === 201) {
+                         location.href = '/';
                     }
-                )
+                })
+                .catch((error) => {
+                    if (error.response.status === 401) {
+                        this.message = "Email non disponible.";
+                    }  
+                });
             }
-
-            else{
+            else if( password != passwordVerif){
                 this.message = "Vérifier le mot de passe";
-            }   
+            }
+            
         }
     }
 }

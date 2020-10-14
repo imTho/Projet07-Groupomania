@@ -11,7 +11,7 @@
         <div class="comments">
             <div class="comment" v-for="comment in comments" :key="comment.id">
             <div class="comment-info">Par {{comment.prenom}} {{comment.nom}} à {{comment.date}} 
-                <span @click="deleteComment()" v-if="comment.userId == $user.userId || $user.userId == 1" :key="comment.id">Supprimer</span>
+                <span @click="deleteComment(comment.id)" v-if="comment.userId == $user.userId || $user.admin == 1" :key="comment.id">Supprimer</span>
             </div>
             {{comment.content}}
             </div>
@@ -32,7 +32,7 @@ export default {
         }
     },
 
-    created(){
+    mounted(){
         this.getAllComments();
     },
 
@@ -77,7 +77,19 @@ export default {
             });
         },
 
-        deleteComment(){
+        deleteComment(commentId){
+            axios.post(`${this.$apiUrl}/posts/deleteComment`,
+                {
+                    commentId
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.$token}`
+                    }
+                }
+            )
+            .then(this.getAllComments())
         }
 
     }

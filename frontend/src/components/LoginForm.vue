@@ -8,9 +8,11 @@
             
             <input id="login-password" type="password" placeholder="Mot de passe" required>
 
+            <div class="error-message">{{message}}</div>
+
             <button id="login-btn" type="submit">Connexion</button>
 
-            <div class="error-message">{{message}}</div>
+            
         </form>
     </div>
 </template>
@@ -49,6 +51,9 @@ export default {
                 location.reload();
             })
             .catch((error) => {
+                if (error.response.status === 404) {
+                    this.message = "Utilisateur inconnu.";
+                }
                 if (error.response.status === 401) {
                     this.message = "Email ou mot de passe invalide.";
                 }
@@ -111,6 +116,10 @@ export default {
 
     #login-btn:hover{
         transform: scale(1.025);
+    }
+
+    .error-message{
+        background-color: rgba(255, 0, 0, 0.301);
     }
     
 </style>
