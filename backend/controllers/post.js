@@ -1,7 +1,7 @@
 const db = require("../database_connect");
 // All post
 exports.getAllPost = (req, res, next) => {
-    db.query('SELECT * FROM users INNER JOIN posts ON users.id = posts.userId ORDER BY date DESC', (error, result, field) => {
+    db.query('SELECT users.nom, users.prenom, posts.id, posts.userId, posts.title, posts.content, DATE_FORMAT(posts.date, "le %e %M %Y à %kh%i") AS date FROM users INNER JOIN posts ON users.id = posts.userId ORDER BY date DESC', (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -12,7 +12,7 @@ exports.getAllPost = (req, res, next) => {
 };
 // NewPost
 exports.newPost = (req, res, next) => {
-    db.query(`INSERT INTO posts VALUES (NULL, '${req.body.userId}', '${req.body.title}', current_timestamp(), '${req.body.content}')`, (error, result, field) => {
+    db.query(`INSERT INTO posts VALUES (NULL, '${req.body.userId}', '${req.body.title}', NOW(), '${req.body.content}')`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -69,7 +69,7 @@ exports.getUserPosts = (req, res, next) => {
 };
 // New comment
 exports.newComment = (req, res, next) => {
-    db.query(`INSERT INTO comments VALUES (NULL, ${req.body.userId}, ${req.body.postId}, current_timestamp(), '${req.body.content}')`, (error, result, field) => {
+    db.query(`INSERT INTO comments VALUES (NULL, ${req.body.userId}, ${req.body.postId}, NOW(), '${req.body.content}')`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -80,7 +80,7 @@ exports.newComment = (req, res, next) => {
 };
 // Get all comments
 exports.getAllComments = (req, res, next) => {
-    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, comments.date
+    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, DATE_FORMAT(comments.date, "le %e %M %Y à %kh%i") AS date
     FROM users INNER JOIN comments ON users.id = comments.userId 
      WHERE comments.postId = ${req.body.postId} 
      ORDER BY comments.date DESC`,

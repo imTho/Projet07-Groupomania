@@ -4,8 +4,10 @@
         <nav><router-link to="/" class="active">Se connecter</router-link> | <router-link to="/signup">S'incrire</router-link></nav>
         <form @submit.prevent = login()>
 
+            <label for="login-email">Email :</label>
             <input id="login-email" type="text" placeholder="Email" required>
             
+            <label for="login-password">Mot de passe :</label>
             <input id="login-password" type="password" placeholder="Mot de passe" required>
 
             <div class="error-message">{{message}}</div>
@@ -120,6 +122,21 @@ export default {
 
     .error-message{
         background-color: rgba(255, 0, 0, 0.301);
+    }
+
+    label{
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: rgb(109, 109, 109);
+        text-align: left;
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
     }
     
 </style>

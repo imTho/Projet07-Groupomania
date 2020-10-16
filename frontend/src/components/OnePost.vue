@@ -6,8 +6,11 @@
         </div>
 
         <div class="modify-wrapper" v-if="modify">
-            <input type="text" class="modify-title" v-model="this.post.title">
-            <textarea class="modify-content" v-model="this.post.content"></textarea>
+            <label for="modify-title">Modifier le titre :</label>
+            <input type="text" id="modify-title" v-model="this.post.title">
+
+            <label for="modify-content">Modifier le contenu :</label>
+            <textarea id="modify-content" v-model="this.post.content"></textarea>
         </div>
 
         <button v-if="authorized && !modify" @click="modify = true">Modifier</button>
@@ -139,13 +142,13 @@ export default {
         border-bottom: solid red 5px;
     }
 
-    .modify-title {
+    #modify-title {
         margin: 0;
         color: red;
         font-size: 2rem;
     }
 
-    .modify-content{
+    #modify-content{
         margin-top: 20px;
         height: 200px;
         width: calc(100% - 22px);
@@ -169,5 +172,20 @@ export default {
 
     .delete-btn{
         background-color: red !important;
+    }
+
+    label{
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: rgb(109, 109, 109);
+        text-align: left;
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
     }
 </style>
