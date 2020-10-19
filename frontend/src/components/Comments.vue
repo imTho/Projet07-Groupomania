@@ -142,13 +142,15 @@ export default {
     .comment-info{
         display: flex;
         justify-content: space-between;
-        color: rgb(175, 175, 175);
+        color: rgb(0, 0, 0);
         font-size: .8rem;
         margin-bottom: 10px;
     }
 
     .comment-info span{
         cursor: pointer;
+        color: rgb(255, 0, 0);
+        font-weight: bold;
     }
 
     label{
