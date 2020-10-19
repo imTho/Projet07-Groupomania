@@ -51,7 +51,7 @@ export default {
                     }
                 )
                 .then( this.visible = false)
-                .then(this.$root.$emit('component1'));
+                .then(this.$root.$emit('Posts'));
         }
     }
 }

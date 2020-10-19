@@ -32,7 +32,7 @@ export default {
         }
 
         //Export de la fonction
-        this.$root.$on('component1', () => {
+        this.$root.$on('Posts', () => {
             this.getAllPost();
         });
     },
