@@ -90,7 +90,7 @@ export default {
                     }
                 }
             )
-            .then(this.getAllComments())
+            .then(this.getAllComments());
         }
 
     }

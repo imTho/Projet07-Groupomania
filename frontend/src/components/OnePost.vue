@@ -86,8 +86,8 @@ export default {
 
         modifyOnePost(){
             const postId = this.$route.params.id;
-            const title = document.querySelector('.modify-title').value;
-            const content = document.querySelector('.modify-content').value;
+            const title = document.querySelector('#modify-title').value;
+            const content = document.querySelector('#modify-content').value;
             
             axios.post(`${this.$apiUrl}/posts/modifyOnePost`,
                 {

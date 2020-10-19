@@ -2,7 +2,7 @@
     <div class="wrapper">
         <form @submit.prevent = signup()>
             <img src="/assets/img/groupomania-logo.png" alt="Groupomania logo">
-            <nav><router-link to="/">Se connecter</router-link> | <router-link to="/signup" class="active">S'incrire</router-link></nav>
+            <nav><router-link to="/">Se connecter</router-link> | <router-link to="/signup" class="active">S'inscrire</router-link></nav>
             <label for="signup-nom">Nom :</label>
             <input id="signup-nom" type="text" placeholder="Nom" required>
             
