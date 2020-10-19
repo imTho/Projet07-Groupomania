@@ -7,11 +7,35 @@
           <div class="form-wrapper">
             <span class="form-close"  @click="visible = false">Fermer</span>
             <form class="newPost-form" @submit.prevent="sendNewPost()">
+
                 <label for="newPost-title">Titre</label>
                 <input id="newPost-title" type="text" placeholder="Titre de votre post..." required>
+
                 <label for="newPost-content">Contenu</label>
-                <textarea id="newPost-content" placeholder="Contenu de votre post..."></textarea>
+                
+                <editor
+                    apiKey="pwm5eqs0wnsqf0ip208nkercdytlgj4hyr2nx8544cd44c8k"
+                    v-model="content"
+                    :init="{
+                    menubar: false,
+                    plugins: [
+                        'advlist autolink lists link',
+                        'searchreplace visualblocks code fullscreen',
+                        'print preview anchor insertdatetime media',
+                        'paste code help wordcount table'
+                    ],
+                    toolbar:
+                        'undo redo | formatselect | bold italic | \
+                        alignleft aligncenter alignright | \
+                        bullist numlist outdent indent | help'
+                    }"
+                >
+                    <textarea id="newPost-content" placeholder="Contenu de votre post..."></textarea>
+                </editor>
+                
+
                 <button id="newPost-btn" type="submit" >Publier</button>
+
             </form>
           </div>
       </div>
@@ -22,20 +46,28 @@
 
 <script>
 import axios from 'axios';
+import Editor from '@tinymce/tinymce-vue'
 
 export default {
     name: 'NewPost',
 
+    components: {
+      editor: Editor
+    },
+
     data(){
         return{
             visible: false,
+            content: '',
         }
     },
 
     methods: {
         sendNewPost(){
             const title = document.getElementById("newPost-title").value;
-            const content = document.getElementById("newPost-content").value;
+            const content = this.content;
+
+            console.log(content);
 
             axios.post(`${this.$apiUrl}/posts/newPost`,
                     {

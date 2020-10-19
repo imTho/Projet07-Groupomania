@@ -2,7 +2,7 @@
     <div class="onePost">
         <div class="post-wrapper" v-if="!modify">
             <h2 class="post-title">{{this.post.title}}</h2>
-            <div class="post-content">{{this.post.content}}</div>
+            <div class="post-content" v-html="this.post.content"></div>
         </div>
 
         <div class="modify-wrapper" v-if="modify">
@@ -10,7 +10,26 @@
             <input type="text" id="modify-title" v-model="this.post.title">
 
             <label for="modify-content">Modifier le contenu :</label>
-            <textarea id="modify-content" v-model="this.post.content"></textarea>
+            <editor 
+                :initialValue="this.post.content"
+                apiKey="pwm5eqs0wnsqf0ip208nkercdytlgj4hyr2nx8544cd44c8k"
+                v-model="modifiedContent"
+                :init="{
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link',
+                    'searchreplace visualblocks code fullscreen',
+                    'print preview anchor insertdatetime media',
+                    'paste code help wordcount table'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic | \
+                    alignleft aligncenter alignright | \
+                    bullist numlist outdent indent | help'
+                }"
+            >
+                <textarea id="modify-content" v-model="this.post.content"></textarea>
+            </editor>
         </div>
 
         <button v-if="authorized && !modify" @click="modify = true">Modifier</button>
@@ -23,12 +42,18 @@
 
 <script>
 import axios from 'axios';
+import Editor from '@tinymce/tinymce-vue';
 
 export default {
     name: 'OnePost',
 
+    components: {
+      editor: Editor
+    },
+
     data(){
         return{
+            modifiedContent: '',
             post: [],
             authorized: false,
             modify: false
@@ -87,7 +112,7 @@ export default {
         modifyOnePost(){
             const postId = this.$route.params.id;
             const title = document.querySelector('#modify-title').value;
-            const content = document.querySelector('#modify-content').value;
+            const content = this.modifiedContent;
             
             axios.post(`${this.$apiUrl}/posts/modifyOnePost`,
                 {
@@ -103,7 +128,7 @@ export default {
                 }
             )
             .then(location.href = "/");
-        }
+        },
     }
 }
 </script>
@@ -144,6 +169,7 @@ export default {
 
     #modify-title {
         margin: 0;
+        margin-bottom: 20px;
         color: red;
         font-size: 2rem;
     }

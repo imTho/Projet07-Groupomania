@@ -7,7 +7,7 @@
                     <span class="post-modify" v-if="post.userId == $user.userId || $user.admin == 1">Modifier</span> 
                 </div>  
                 <h2 class="post-title">{{post.title}}</h2>
-                <div class="post-content">{{characterLimit(post.content)}}</div>
+                <div class="post-content" v-html="characterLimit(post.content)"></div>
             </router-link>
         </div>
     </div>
