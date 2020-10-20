@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 16 oct. 2020 à 13:14
+-- Généré le : mar. 20 oct. 2020 à 15:14
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.10
 
@@ -35,15 +35,6 @@ CREATE TABLE `comments` (
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Déchargement des données de la table `comments`
---
-
-INSERT INTO `comments` (`id`, `userId`, `postId`, `date`, `content`) VALUES
-(1, 2, 3, '2020-10-12 00:00:00', 'First !'),
-(11, 1, 7, '2020-10-16 13:09:19', 'Très bon post, merci !'),
-(12, 1, 3, '2020-10-16 13:10:21', 'Super intéressant !');
-
 -- --------------------------------------------------------
 
 --
@@ -57,15 +48,6 @@ CREATE TABLE `posts` (
   `date` datetime NOT NULL DEFAULT current_timestamp(),
   `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Déchargement des données de la table `posts`
---
-
-INSERT INTO `posts` (`id`, `userId`, `title`, `date`, `content`) VALUES
-(3, 2, 'Premier post', '2020-10-12 12:22:19', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas purus lectus, ultricies sit amet turpis et, venenatis gravida urna. Donec eu tincidunt lacus. Vestibulum laoreet turpis egestas posuere vestibulum. Nam rhoncus ex odio, non sodales leo finibus quis. Vestibulum mollis viverra sapien sit amet euismod. Sed rutrum eu nisl in varius. Duis ipsum nibh, lobortis et lorem sed, finibus ultricies nibh. Fusce tincidunt ullamcorper augue, sed lobortis lacus maximus in. Mauris ut ultrices erat. Vestibulum mauris elit, pellentesque at feugiat id, tempor vel urna. Nulla pellentesque egestas egestas. Curabitur tortor nisi, faucibus nec nibh eu, euismod pretium nisl.'),
-(6, 1, 'Second post', '2020-10-16 12:56:27', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vehicula in tellus sit amet placerat. Integer venenatis ipsum at hendrerit egestas. Integer eget nisi ac nisl semper egestas sed at mi. Praesent est metus, suscipit a nisi sit amet, gravida mattis dolor. Praesent velit metus, feugiat sed quam id, dapibus efficitur mi.'),
-(7, 13, 'Encore un post', '2020-10-16 13:07:54', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sodales tortor ut ipsum lobortis laoreet. Aliquam erat volutpat. Morbi congue purus ut nulla fermentum, ac volutpat quam tristique. Vestibulum et nisl lacinia, gravida risus a, sodales odio. Duis quis ultrices est. Duis velit enim, lobortis id quam ac, varius tincidunt elit. Quisque eget elementum erat, eget aliquam nisi. Etiam at vehicula lectus, a scelerisque sapien. Aliquam eget urna sed arcu mattis ornare.');
 
 -- --------------------------------------------------------
 
@@ -87,9 +69,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `nom`, `prenom`, `password`, `email`, `admin`) VALUES
-(1, 'Eschlimann', 'Theo', '$2b$10$hhbTusABayCeAIxou3bGEeCbKuPY7CNEtq46/w2Hkeafw/3/OHY3S', 'dGhlby5lc2NobGltYW5uQGdtYWlsLmNvbQ==', 0),
-(2, 'Eschliner', 'Moumou', '$2b$10$Su3KuMCvC4oPaMoEuiUN7ODzN3VwMcU9h2bVRyDdUYXbeXoIdjetC', 'bW91bW91QGdtYWlsLmNvbQ==', 0),
-(13, 'Admin', 'Theo', '$2b$10$4tbwi0vY.RXixru.nx05eeKTTchedU.5kyqEdvpJ8JKTkL05BRMxi', 'YWRtaW5AZ21haWwuY29t', 1);
+(15, 'Admin', 'Admin', '$2b$10$QuYnDuCybMIOT6rO/ArrM.IGcpsDvhiwqj/4zsFBDLHAcpwdcXSYm', 'YWRtaW5AYWRtaW4uY29t', 1);
 
 --
 -- Index pour les tables déchargées
@@ -124,19 +104,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Contraintes pour les tables déchargées
