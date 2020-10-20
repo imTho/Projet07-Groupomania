@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require("../database_connect");
-const userQuery = require('../models/user');
 
 //Inscription
 exports.signup = (req, res, next) => {

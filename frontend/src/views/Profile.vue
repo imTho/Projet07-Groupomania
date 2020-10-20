@@ -3,24 +3,18 @@
         <LoginForm v-if="!connected"/>
 
         <Header v-if="connected"/>
-        <div class="profile-info">
-            <h2>Bonjour,</h2>
-            <span>{{this.$user.nom}}</span> <span>{{this.$user.prenom}}</span>
-        </div>
 
-        <div class="delete-profile" @click="deleteUser()">Supprimer le compte</div>
-
-        <h3>Vos posts :</h3>
-        <UserPosts/>
+        <UserProfile v-if="connected"/>
+        <UserPosts v-if="connected"/>
         
     </div>
 </template>
 
 <script>
-import axios from 'axios';
 
 import LoginForm from '@/components/LoginForm.vue';
 import Header from '@/components/Header.vue';
+import UserProfile from '@/components/UserProfile.vue';
 import UserPosts from '@/components/UserPosts.vue';
 
 export default {
@@ -29,6 +23,7 @@ export default {
     components: {
         LoginForm,
         Header,
+        UserProfile,
         UserPosts
   },
 
@@ -38,7 +33,7 @@ export default {
     };
   },
 
-   mounted(){
+   created(){
     this.checkConnected()
   },
 
@@ -53,54 +48,10 @@ export default {
         console.log('Utilisateur non connecté !');
       }
     },
-
-    deleteUser(){
-      const userId = this.$user.userId;
-
-      axios.post(`${this.$apiUrl}/auth/deleteUser`,
-          {
-            userId
-          },
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${this.$token}`
-            }
-          }
-      )
-      .then(localStorage.removeItem('user'))
-      .then(location.href = "/");
-    }
-
   }
 }
 </script>
 
 <style scoped>
 
-    .profile-info{
-        margin: 50px auto;
-        max-width: 800px;
-        /* text-align: left; */
-    }
-
-    .profile-info h2 {
-        margin-bottom: 20px;
-        font-size: 3rem;
-    }
-
-    .profile-info h3 {
-        /* text-align: left; */
-    }
-
-    .profile-info span {
-        font-size: 3rem;
-    }
-
-    .delete-profile{
-      color: red;
-      margin-bottom: 30px;
-      font-size: 24px;
-      cursor: pointer;
-    }
 </style>

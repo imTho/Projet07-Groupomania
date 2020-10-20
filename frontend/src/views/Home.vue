@@ -31,6 +31,10 @@ export default {
     };
   },
 
+  created(){
+    this.checkConnected()
+  },
+
   methods: {
     checkConnected(){
       if(localStorage.user !== undefined){
@@ -42,10 +46,6 @@ export default {
         console.log('Utilisateur non connecté !');
       }
     }
-  },
-
-  mounted(){
-    this.checkConnected()
   }
 }
 </script>

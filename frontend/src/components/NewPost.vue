@@ -102,7 +102,7 @@ export default {
         background-color: rgb(255, 34, 34);
         color: white;
         max-width: 750px;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         transition-duration: 0.2s;
         cursor: pointer;
     }
