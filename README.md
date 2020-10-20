@@ -22,7 +22,7 @@ DB_NAME=groupomania
 ```
 ----------
 
-For accessing to the admin user, enter the following infos on the connection page :
+To access admin user, enter the following infos on the connection page :
 ```
 Email:
 admin@admin.com
