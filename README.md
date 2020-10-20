@@ -4,7 +4,7 @@
 ## Installation
 
 ### Database setup
-Star your MySQL server
+Start your MySQL server
 
 Then import the database, 
 you can find it from :
@@ -12,6 +12,7 @@ you can find it from :
 /backend/database_backup/groupomania.sql
 ```
 Create a .ENV file in the backend root, 
+copy paste the following and
 change DB_USER and DB_PASS with your infos:
 ```
 DB_HOST=localhost
