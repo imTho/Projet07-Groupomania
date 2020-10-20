@@ -104,6 +104,10 @@ export default {
         font-weight: bold;
     }
 
+    .post-title{
+        color: red;
+    }
+
     .post-content{
         font-size: .9rem;
     }
