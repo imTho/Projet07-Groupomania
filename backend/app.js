@@ -5,12 +5,8 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
-const path = require('path');
 
 const app = express();
-
-//Database connection//
-const db = require("./database_connect");
 
 //CORS
 app.use((req, res, next) => {
