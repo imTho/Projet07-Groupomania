@@ -43,10 +43,9 @@ export default {
             const userId = this.$user.userId;
             const content = document.getElementById('new-comment').value;
 
-            axios.post(`${this.$apiUrl}/posts/newComment`,
+            axios.post(`${this.$apiUrl}/posts/${postId}/comment/`,
                 {
                     userId,
-                    postId,
                     content
                 },
                 {
@@ -62,10 +61,7 @@ export default {
         getAllComments(){
             const postId = parseInt(this.$route.params.id);
 
-            axios.post(`${this.$apiUrl}/posts/getAllComments`,
-                {
-                    postId
-                },
+            axios.get(`${this.$apiUrl}/posts/${postId}/comments`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -79,10 +75,7 @@ export default {
         },
 
         deleteComment(commentId){
-            axios.post(`${this.$apiUrl}/posts/deleteComment`,
-                {
-                    commentId
-                },
+            axios.delete(`${this.$apiUrl}/posts/comment/${commentId}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

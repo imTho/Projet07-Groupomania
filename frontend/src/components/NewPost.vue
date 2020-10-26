@@ -69,7 +69,7 @@ export default {
 
             console.log(content);
 
-            axios.post(`${this.$apiUrl}/posts/newPost`,
+            axios.post(`${this.$apiUrl}/posts/`,
                     {
                         userId: this.$user.userId,
                         title,

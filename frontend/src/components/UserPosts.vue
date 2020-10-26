@@ -31,10 +31,7 @@ export default {
         getUserPosts(){
             const userId = this.$user.userId;
             
-            axios.post(`${this.$apiUrl}/posts/getUserPosts`,
-                {
-                    userId,
-                },
+            axios.get(`${this.$apiUrl}/posts/user${userId}/posts`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

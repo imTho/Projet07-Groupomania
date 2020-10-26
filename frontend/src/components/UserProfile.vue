@@ -23,10 +23,7 @@ export default {
     deleteUser(){
       const userId = this.$user.userId;
 
-      axios.post(`${this.$apiUrl}/auth/deleteUser`,
-          {
-            userId
-          },
+      axios.delete(`${this.$apiUrl}/auth/${userId}`,
           {
             headers: {
               'Content-Type': 'application/json',

@@ -82,7 +82,7 @@ exports.login = (req, res, next) => {
 };
 // Delete User
 exports.deleteUser = (req, res, next) => {
-    db.query(`DELETE FROM users WHERE users.id = ${req.body.userId}`, (error, result, field) => {
+    db.query(`DELETE FROM users WHERE users.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error

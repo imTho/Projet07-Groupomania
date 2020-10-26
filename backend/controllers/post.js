@@ -25,7 +25,7 @@ exports.newPost = (req, res, next) => {
 };
 // OnePost
 exports.getOnePost = (req, res, next) => {
-    db.query(`SELECT * FROM posts WHERE posts.id = ${req.body.postId}`, (error, result, field) => {
+    db.query(`SELECT * FROM posts WHERE posts.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -36,7 +36,7 @@ exports.getOnePost = (req, res, next) => {
 };
 // Delete OnePost
 exports.deleteOnePost = (req, res, next) => {
-    db.query(`DELETE FROM posts WHERE posts.id = ${req.body.postId}`, (error, result, field) => {
+    db.query(`DELETE FROM posts WHERE posts.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -47,7 +47,7 @@ exports.deleteOnePost = (req, res, next) => {
 };
 // Modify OnePost
 exports.modifyOnePost = (req, res, next) => {
-    db.query(`UPDATE posts SET title = '${req.body.title}', content = '${req.body.content}' WHERE posts.id = ${req.body.postId}`, (error, result, field) => {
+    db.query(`UPDATE posts SET title = '${req.body.title}', content = '${req.body.content}' WHERE posts.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -58,7 +58,7 @@ exports.modifyOnePost = (req, res, next) => {
 };
 // Get User's Posts
 exports.getUserPosts = (req, res, next) => {
-    db.query(`SELECT * FROM posts WHERE posts.userId = ${req.body.userId}`, (error, result, field) => {
+    db.query(`SELECT * FROM posts WHERE posts.userId = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -69,7 +69,7 @@ exports.getUserPosts = (req, res, next) => {
 };
 // New comment
 exports.newComment = (req, res, next) => {
-    db.query(`INSERT INTO comments VALUES (NULL, ${req.body.userId}, ${req.body.postId}, NOW(), '${req.body.content}')`, (error, result, field) => {
+    db.query(`INSERT INTO comments VALUES (NULL, ${req.body.userId}, ${req.params.id}, NOW(), '${req.body.content}')`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -80,10 +80,7 @@ exports.newComment = (req, res, next) => {
 };
 // Get all comments
 exports.getAllComments = (req, res, next) => {
-    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, comments.date
-    FROM users INNER JOIN comments ON users.id = comments.userId 
-     WHERE comments.postId = ${req.body.postId} 
-     ORDER BY comments.date DESC`,
+    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, comments.date FROM users INNER JOIN comments ON users.id = comments.userId WHERE comments.postId = ${req.params.id} ORDER BY comments.date DESC`,
         (error, result, field) => {
             if (error) {
                 return res.status(400).json({
@@ -95,7 +92,7 @@ exports.getAllComments = (req, res, next) => {
 };
 //Delete comment
 exports.deleteComment = (req, res, next) => {
-    db.query(`DELETE FROM comments WHERE comments.id = ${req.body.commentId}`, (error, result, field) => {
+    db.query(`DELETE FROM comments WHERE comments.id = ${req.params.id}`, (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error

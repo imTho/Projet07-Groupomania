@@ -39,7 +39,7 @@ export default {
 
     methods: {
         getAllPost(){
-            axios.get(`${this.$apiUrl}/posts/getAllPost`,
+            axios.get(`${this.$apiUrl}/posts/`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
