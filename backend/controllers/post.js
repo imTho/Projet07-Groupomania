@@ -1,7 +1,7 @@
 const db = require("../database_connect");
 // All post
 exports.getAllPost = (req, res, next) => {
-    db.query('SELECT users.nom, users.prenom, posts.id, posts.userId, posts.title, posts.content, DATE_FORMAT(posts.date, "le %e %M %Y à %kh%i") AS date FROM users INNER JOIN posts ON users.id = posts.userId ORDER BY date DESC', (error, result, field) => {
+    db.query('SELECT users.nom, users.prenom, posts.id, posts.userId, posts.title, posts.content, posts.date AS date FROM users INNER JOIN posts ON users.id = posts.userId ORDER BY date DESC', (error, result, field) => {
         if (error) {
             return res.status(400).json({
                 error
@@ -80,7 +80,7 @@ exports.newComment = (req, res, next) => {
 };
 // Get all comments
 exports.getAllComments = (req, res, next) => {
-    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, DATE_FORMAT(comments.date, "le %e %M %Y à %kh%i") AS date
+    db.query(`SELECT users.id, users.nom, users.prenom, comments.id,comments.content, comments.userId, comments.date
     FROM users INNER JOIN comments ON users.id = comments.userId 
      WHERE comments.postId = ${req.body.postId} 
      ORDER BY comments.date DESC`,

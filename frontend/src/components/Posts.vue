@@ -3,7 +3,7 @@
         <article class="post" v-for = "post in posts" :key="post.id">
             <router-link :to="{ name: 'Post', params: { id: post.id } }">
                 <div class="post-header">
-                    <span class="post-info">Posté {{post.date}} par {{post.prenom}} {{post.nom}}</span>
+                    <span class="post-info">Posté le {{dateFormat(post.date)}} par {{post.prenom}} {{post.nom}}</span>
                     <span class="post-modify" v-if="post.userId == $user.userId || $user.admin == 1">Modifier</span> 
                 </div>  
                 <h2 class="post-title">{{post.title}}</h2>
@@ -62,6 +62,14 @@ export default {
             else{
                 return text;
             }
+        },
+
+        dateFormat(date){
+            const event = new Date(date);
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+            return event.toLocaleDateString('fr-FR', options);
         }
     }
 }

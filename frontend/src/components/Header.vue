@@ -1,7 +1,9 @@
 <template>
     <div class="header">
         <router-link to='/'>
+        <h1>
             <img src="/assets/img/groupomania-logo-header.png" alt="Groupomania logo">
+        </h1>
         </router-link>
 
         <nav>

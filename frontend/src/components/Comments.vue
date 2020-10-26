@@ -11,7 +11,7 @@
 
         <div class="comments">
             <div class="comment" v-for="comment in comments" :key="comment.id">
-            <div class="comment-info">Par {{comment.prenom}} {{comment.nom}}  {{comment.date}} 
+            <div class="comment-info">Par {{comment.prenom}} {{comment.nom}} le {{dateFormat(comment.date)}} 
                 <span @click="deleteComment(comment.id)" v-if="comment.userId == $user.userId || $user.admin == 1" :key="comment.id">Supprimer</span>
             </div>
             {{comment.content}}
@@ -91,6 +91,14 @@ export default {
                 }
             )
             .then(this.getAllComments());
+        },
+
+        dateFormat(date){
+            const event = new Date(date);
+
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+
+            return event.toLocaleDateString('fr-FR', options);
         }
 
     }
