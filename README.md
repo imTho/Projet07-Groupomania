@@ -1,6 +1,35 @@
 # [Formation OpenClassRooms](https://openclassrooms.com/fr/paths/185-developpeur-web)
 ## Projet07-Groupomania - Création d'une application fullstack
 
+### Compétences professionnelles :
+
+- Conception et integration de l'interface utilisateur (VueJS)
+
+- Création et implémentation d'un modèle logique de données conformément à la réglementation (API REST)
+
+- Mettre en œuvre des opérations CRUD de manière sécurisée
+
+- Stockage des données dans une base de données SQL
+
+- Sécurisation des données (OWASP/RGPD)
+
+- Authentifier un utilisateur et maintenir sa session
+
+- Personnaliser le contenu envoyé à un client web
+
+### Compétences techniques :
+
+- HTML
+- CSS / SCSS
+- JS
+- API REST
+- VUEJS
+- NODE.JS / Express
+- Bcrypt
+- JWT
+- MySQL
+- GIT
+
 ## Installation
 
 ### Database setup
