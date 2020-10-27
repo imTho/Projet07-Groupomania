@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require("../database_connect");
+require('dotenv').config();
 
 //Inscription
 exports.signup = (req, res, next) => {
@@ -66,7 +67,7 @@ exports.login = (req, res, next) => {
                                 admin: results[0].admin,
                                 token: jwt.sign({
                                     userId: results[0].id
-                                }, 'SECRET_TOKEN', {
+                                }, process.env.TOKEN, {
                                     expiresIn: '24h'
                                 })
                             });

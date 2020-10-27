@@ -108,7 +108,8 @@ export default {
     }
 
     .post-modify{
-        color: rgb(255, 60, 60);
+        color: rgb(219, 17, 17);
+        font-size: 1rem;
         font-weight: bold;
     }
 

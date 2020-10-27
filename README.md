@@ -1,6 +1,8 @@
 # [Formation OpenClassRooms](https://openclassrooms.com/fr/paths/185-developpeur-web)
 ## Projet07-Groupomania - Création d'une application fullstack
 
+![](presentation_gif.gif)
+
 ### Compétences professionnelles :
 
 - Conception et integration de l'interface utilisateur (VueJS)
@@ -48,6 +50,7 @@ DB_HOST=localhost
 DB_USER=your_databse_user
 DB_PASS=your_user_password
 DB_NAME=groupomania
+TOKEN=hHpK79ZV4N7YAbdj
 ```
 ----------
 
